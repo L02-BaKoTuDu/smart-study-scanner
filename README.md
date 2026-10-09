@@ -10,7 +10,7 @@ Mobile app giúp sinh viên chuyển ảnh chụp slide/bảng trên lớp thàn
 
 | Vai trò | Thành viên | Track |
 | ------- | ---------- | ----- |
-| Nhóm trưởng | **Nguyễn Thành Công** (Bắn) | Project lead, QA, Wiki |
+| Nhóm trưởng | **Nguyễn Thành Công** | Project lead, QA, Wiki |
 | Thành viên | **Lữ Quốc Pháp** | Capture flow, Frontend |
 | Thành viên | **Nguyễn Lê Nguyên** | Design System, Data layer |
 | Thành viên | **Đặng Thành Duy Đan** | Search UX, Landing Page |
