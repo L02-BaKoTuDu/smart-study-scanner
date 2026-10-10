@@ -119,5 +119,5 @@ MIT License — Xem file [LICENSE](LICENSE)
 
 ## 📞 Liên hệ
 
-- **Email nhóm:** [l02.bakotudu@gmail.com](mailto:l02.bakotudu@gmail.com) *(cần tạo)*
+- **Email nhóm:** [cong.nguyen10082005@hcmut.edu.vn](mailto:cong.nguyen10082005@hcmut.edu.vn) *(Nhóm trưởng)*
 - **GitHub Organization:** [L02-BaKoTuDu](https://github.com/L02-BaKoTuDu)
