@@ -1,132 +1,150 @@
 # 01 — Project Direction and Rationale
 
 > *Trang này chứa Mục 1 và Mục 2 trong khung 13 mục của Assignment 1.*
+>
+> **Quy ước đọc:** Trang 01 trình bày **giả định và định hướng ban đầu** của nhóm, sau đó ghi nhận định hướng được điều chỉnh khi có khảo sát. Giả định ban đầu có thể không trùng với kết luận nghiên cứu.
 
 ---
 
 ## Mục 1: Project Direction (Định hướng dự án)
 
-### Bài toán cần giải quyết
+### Bài toán cần giải quyết — giả định ban đầu
 
-Tình trạng **quá tải và phân mảnh ảnh chụp** slide, bảng trắng, sơ đồ ở giảng đường. Sinh viên chụp rất nhiều (trung bình 3–5 buổi/tuần theo khảo sát Arena Peer Review) nhưng ảnh biến thành **"text chết"** trong Camera Roll — không thể gõ từ khóa tìm kiếm khi cần ôn thi cấp tốc.
+Nhóm khởi đầu từ quan sát rằng sinh viên thường **chụp ảnh slide, bảng trắng hoặc sơ đồ** khi học nhưng khó truy xuất lại nội dung sau đó. Ảnh học tập có thể bị trộn với ảnh cá nhân trong thư viện, và việc chỉ lướt theo thời gian chụp có thể không thuận tiện khi người học chỉ nhớ một khái niệm cụ thể.
 
-**Trích dẫn từ khảo sát:**
+**Giả định ban đầu (Initial Problem Hypothesis):** Rào cản quan trọng là nội dung văn bản nằm trong ảnh khó được khai thác như dữ liệu có thể tìm kiếm, hay nhóm gọi là hiện tượng *“text chết”*. Nhóm dự đoán **OCR + keyword search** có thể giúp tìm lại ảnh nhanh hơn duyệt thủ công. Đây là **giả thuyết sản phẩm**, không phải kết luận đã được khảo sát xác nhận.
 
-> *"Mỗi khi ôn thi Hệ điều hành tôi phải lướt đi lướt lại hơn 200 ảnh trong album để tìm 1 slide về Deadlock — mất 10–15 phút, nhiều khi bỏ cuộc."*
-> — Sinh viên năm 3, ngành KTMT
+**Đối chiếu với dữ liệu sau đó:** Trong file khảo sát đã đối chiếu, có 12 phản hồi tổng, trong đó 10 người trả lời các câu hỏi chính. Ở câu hỏi nhiều lựa chọn, 8/10 chọn khó nhớ vị trí/ngày chụp, 7/10 chọn ảnh học lẫn ảnh cá nhân và 3/10 chọn vấn đề text trong ảnh không thể copy/search. Kết quả này gợi ý **vấn đề tổ chức và tìm lại ảnh rộng hơn giả định OCR-first**. Do mẫu nhỏ và câu hỏi tự báo cáo, những số liệu này chỉ là tín hiệu ban đầu, không đủ đại diện toàn bộ thị trường (xem Wiki 02, Mục 5).
 
 ### Đối tượng người dùng mục tiêu
 
-**Sinh viên đại học**, đặc biệt **khối ngành IT, Kỹ thuật** (KTMT, Khoa học Dữ liệu, CNTT, Điện-Điện tử, Cơ khí…) vì:
+**Nhóm người dùng dự kiến:** sinh viên đại học, ưu tiên nhóm Máy tính/CNTT và các ngành kỹ thuật có nhu cầu lưu lại nội dung bài giảng qua ảnh.
 
-- Thường xuyên học qua **công thức, thuật toán, sơ đồ** — khó ghi tay kịp
-- Slide bài giảng có **mật độ thông tin cao**, cần xem lại nhiều lần trước khi thi
-- Có **thói quen ôn thi cấp tốc** vào đêm trước ngày thi
+Lý do nhóm ban đầu lựa chọn phân khúc này:
 
-### Bối cảnh phát sinh vấn đề
+- Tài liệu học tập có thể chứa định nghĩa, code, công thức và sơ đồ khiến việc chép tay hoặc ôn tập bằng ảnh gặp trở ngại.
+- Một số sinh viên dùng điện thoại để chụp nội dung cần giữ lại và xem lại trong những buổi học hoặc kỳ ôn tập sau.
+- Nhóm có điều kiện tiếp cận người dùng khối Máy tính/CNTT để phỏng vấn và thử nghiệm prototype.
 
+**Giới hạn bằng chứng:** 10 người khai ngành trong mẫu hiện tại đều thuộc nhóm Máy tính/CNTT. Chưa có dữ liệu để kết luận thói quen này phổ biến tương tự ở Điện–Điện tử, Cơ khí, Y khoa hay các ngành khác; mở rộng đối tượng là bước nghiên cứu sau.
 
-| Khi nào                    | Ở đâu                      | Hành vi                                         |
-| -------------------------- | -------------------------- | ----------------------------------------------- |
-| Trong giờ học (8:00–17:00) | Giảng đường, phòng lab     | Chụp vội slide/bảng khi giảng viên chuyển nhanh |
-| 1–2 tháng sau (sát kỳ thi) | Căntin, xe buýt, hành lang | Lướt Camera Roll tìm lại 1 khái niệm cụ thể     |
+### Bối cảnh phát sinh vấn đề (scenario giả định, cần kiểm tra thực địa)
 
+| Khi nào | Bối cảnh | Hành vi và khó khăn có thể xảy ra |
+| --- | --- | --- |
+| Trong giờ học | Giảng đường, phòng thực hành | Chụp nhanh slide/bảng bằng camera mặc định hoặc công cụ khác |
+| Sau buổi học | Điện thoại chứa ảnh học tập xen lẫn ảnh đời sống | Khó nhớ ảnh thuộc môn nào, buổi nào hoặc được chụp lúc nào |
+| Khi ôn tập | Ở nhà, thư viện hoặc nơi thuận tiện | Tìm lại ảnh theo chủ đề/từ khóa hoặc duyệt theo ngữ cảnh môn học |
 
-**Đặc điểm then chốt:** Hành vi **chụp** và hành vi **tìm lại** cách nhau **nhiều tuần đến nhiều tháng** — đây là lý do hình thành "text chết" trong album.
+**Lưu ý:** Khoảng cách “nhiều tuần đến nhiều tháng”, việc chụp “3–5 buổi/tuần” và thời gian tìm ảnh “10–15 phút” từng được nêu như thực tế phổ biến nhưng **không được chứng minh bởi file khảo sát hiện có**, nên không dùng làm fact trong phiên bản này.
 
-### Hiện trạng giải quyết
+### Hiện trạng giải quyết và các lựa chọn thay thế
 
+| Phương án | Ưu điểm có thể có | Hạn chế cần kiểm chứng với người dùng |
+| --- | --- | --- |
+| **Thư viện ảnh mặc định** | Đã quen dùng, thao tác chụp/lưu đơn giản | Ảnh học tập có thể bị trộn với ảnh khác, khó duyệt theo môn/buổi |
+| **Album/folder tạo thủ công** | Có thể tổ chức theo môn mà không cần app mới | Phải duy trì việc phân loại ảnh bằng tay |
+| **Google Photos / Google Lens / Apple Photos** | Có những khả năng OCR, nhận dạng hoặc tìm kiếm tùy nền tảng/thiết bị | Cần đo mức phù hợp với workflow bài giảng, không giả định những ứng dụng này “không search được text” |
+| **CamScanner và công cụ scan** | Hỗ trợ chụp tài liệu, xử lý ảnh, xuất file | Cần đối chiếu thực tế thao tác tổ chức và tìm tài liệu học tập |
+| **Apple Notes / Google Keep / Notion** | Ghi chú, tổ chức và liên kết tài liệu | Khác biệt về thao tác nhập ảnh và truy xuất trong bối cảnh học tập cần kiểm chứng |
 
-| Cách hiện tại                 | Ưu điểm                        | Nhược điểm                                       |
-| ----------------------------- | ------------------------------ | ------------------------------------------------ |
-| **Lướt Camera Roll thủ công** | Quen thuộc, không cần cài thêm | Mất 5–15 phút/lần, text không search được        |
-| **CamScanner**                | Cắt ảnh đẹp, xuất PDF          | Tạo PDF dài phải lật từng trang, nhiều quảng cáo |
-| **Microsoft Lens**            | Khử lóa bảng tốt               | Lưu trữ phân tán, không quản lý theo môn học     |
-| **Apple Notes / Google Keep** | Có OCR cơ bản                  | Không tối ưu cho slide bài giảng liên tục        |
-| **Album/folder thủ công**     | Miễn phí, tự phân loại         | Đòi hỏi kỷ luật cao, thường bị bỏ hoang          |
+Phân tích cạnh tranh ở đây là **định hướng nghiên cứu**. Kết luận về tính năng, giá, trạng thái sản phẩm và năng lực từng đối thủ phải được kiểm tra trên phiên bản cụ thể, theo kế hoạch ở Wiki 02, Mục 6.
 
+### Hướng giải pháp đề xuất ban đầu (Initial Solution Hypothesis)
 
-### Hướng giải pháp đề xuất
+Nhóm từng đề xuất ứng dụng di động tập trung vào *post-scan workflow*:
 
-Một **ứng dụng di động** tập trung vào **"Post-scan cho học tập"**:
-
+```mermaid
+flowchart LR
+    A[Chụp slide hoặc bảng] --> B[OCR on-device]
+    B --> C[Lưu theo môn học]
+    C --> D[Keyword Search]
+    D --> E[Side-Drawer Preview]
 ```
-Chụp slide/bảng  →  Tự động OCR On-device  →  Lưu theo môn học  →  Search từ khóa <1s  →  Side-Drawer Preview
-```
 
-**Khác biệt so với giải pháp hiện có:**
+Các lựa chọn được hình dung ban đầu:
 
-- Tập trung 100% vào **học tập** thay vì scan văn phòng
-- **OCR On-device** (Google ML Kit) → chạy offline, không tốn 4G
-- **Search toàn văn** theo từ khóa trên text OCR
-- **Side-Drawer Preview** xem nhanh không cần chuyển màn hình
-- Tự động cấu trúc folder theo **môn học** (gom nhóm thay vì bắt user sắp xếp)
+- **On-device OCR**, dự kiến thử nghiệm với Google ML Kit, để lập chỉ mục chữ trong ảnh.
+- **Keyword search** để người học tìm lại ảnh theo khái niệm thay vì chỉ theo ngày chụp.
+- **Quản lý theo môn học** nhằm giảm ảnh bài giảng bị trộn với ảnh cá nhân.
+- **Side-Drawer Preview** như một phương án xem nhanh kết quả tìm kiếm.
+- **Local-first**, ưu tiên lưu dữ liệu và tra cứu trên máy khi offline.
 
-### Thay đổi so với ý tưởng ban đầu (nếu có)
+Những chi tiết như *search dưới 1 giây*, độ chính xác OCR, phân loại “tự động”, hoặc UX ưu việt của Side-Drawer là **mục tiêu/giả thuyết cần test**, không phải hiệu quả đã được xác nhận. Gán môn thủ công không đồng nghĩa với auto-classification.
 
-Ý tưởng ban đầu là "app ghi chú tích hợp OCR". Sau khi phân tích 5 existing solutions (Mục 6), nhóm **thu hẹp scope** thành **chỉ tập trung vào Post-scan workflow** — không cạnh tranh trên mặt trận ghi chú tổng quát (đã có Notion, Evernote, Apple Notes), mà đi sâu vào **pain point "text chết"** mà các app kia chưa giải quyết tốt.
+### Quá trình thay đổi định hướng sau nghiên cứu (Evolution of Project Direction)
+
+Ý tưởng sơ khởi là **ứng dụng ghi chú tích hợp OCR**. Nhóm tiếp tục thu hẹp sang **công cụ quản lý và tìm lại ảnh tài liệu học tập**, thay vì xây dựng một app ghi chú tổng quát.
+
+Khi khảo sát ban đầu cho thấy các vấn đề về **vị trí ảnh** và **ảnh học tập lẫn ảnh cá nhân** được lựa chọn nhiều hơn riêng vấn đề text không tìm kiếm được, nhóm **điều chỉnh giả thuyết**:
+
+| Khía cạnh | Định hướng OCR-first ban đầu | Định hướng hiện tại để kiểm chứng |
+| --- | --- | --- |
+| **Problem** | Text trong ảnh khó tìm kiếm | Khó tổ chức, định vị và tìm lại ảnh bài giảng |
+| **Input** | Chụp trong app | Chụp mới **hoặc** nhập từ Gallery |
+| **Retrieval** | Chủ yếu keyword search | Kết hợp browse theo môn/ngày và keyword search |
+| **Organization** | Tự động nhóm ảnh | MVP bắt đầu bằng gán môn thủ công; nghiên cứu grouping tự động sau |
+| **Preview** | Side-Drawer cố định | Quick Preview; chưa khóa phương án UI |
+| **Success** | Search có độ trễ thấp | Tìm **đúng ảnh** nhanh hơn, với tổng công sức ít hơn |
 
 ---
 
-## Mục 2: Mobile Product Rationale (Lập luận vì sao phải làm Mobile)
+## Mục 2: Mobile Product Rationale (Lập luận vì sao chọn Mobile)
 
 ### Tác vụ & bối cảnh di động
 
-Hành vi chụp ảnh bài giảng diễn ra **tức thời tại giảng đường** trong vài giây:
+Việc lưu ảnh bài giảng thường gắn với thiết bị sẵn có trong lớp học. Điện thoại là lựa chọn **phù hợp để thu nhận dữ liệu tại chỗ** vì có camera, thư viện ảnh và khả năng sử dụng khi không có máy tính. Tuy nhiên, đây **không phải nền tảng duy nhất** hỗ trợ camera hay lưu trữ offline: web và tablet cũng có khả năng tương tự ở các mức độ khác nhau.
 
-- Slide thay đổi nhanh (PowerPoint mỗi 1–2 phút)
-- Bảng trắng bị bôi xóa liên tục
-- Cửa sổ thời gian để chụp rất ngắn → user cần **sẵn sàng chụp trong 1 chạm**
+Các tình huống mobile-first nhóm muốn hỗ trợ:
 
-→ **Điện thoại là thiết bị duy nhất** user có thể rút ra và thao tác trong tích tắc. Laptop, máy tính bàn không khả thi.
+1. **Chụp mới:** Ghi lại slide/bảng trong thời gian ngắn mà không phải thao tác phức tạp.
+2. **Nhập ảnh có sẵn:** Dùng lại ảnh từ Gallery thay vì buộc sinh viên thay đổi cách chụp quen thuộc.
+3. **Tìm nhanh khi di chuyển:** Duyệt theo môn/ngày hoặc tìm keyword, xem ảnh và kiểm tra nội dung ngay trên điện thoại.
+4. **Không có mạng:** Xem ảnh đã lưu và tìm trong chỉ mục cục bộ nếu quá trình OCR/lập chỉ mục đã hoàn thành.
 
-### Khai thác phần cứng di động
+### Khai thác khả năng của thiết bị di động
 
+| Capability | Vai trò dự kiến | Lưu ý triển khai |
+| --- | --- | --- |
+| **Camera** | Chụp nhanh bài giảng | Cần test tốc độ thao tác; auto-crop chỉ là tính năng bổ sung nếu có giá trị |
+| **Local Photo Library / Photo Picker** | Nhập ảnh đã có trong thư viện | Tránh yêu cầu quyền truy cập toàn bộ thư viện nếu không cần |
+| **CPU / khả năng xử lý on-device** | Nhận diện chữ bằng ML Kit hoặc engine phù hợp | Đo accuracy, thời gian và pin; không yêu cầu mặc định mọi máy phải có NPU |
+| **Local persistent storage** | Lưu ảnh, metadata, kết quả OCR và chỉ mục | Chọn công nghệ phù hợp stack cuối cùng (SQLite, Room hoặc giải pháp khác) |
+| **Touch UI** | Browse, filter, search và xem nhanh ảnh | Side-Drawer chỉ là một trong các UI pattern có thể thử |
 
-| Capability                  | Ứng dụng trong Smart Study Scanner                             |
-| --------------------------- | -------------------------------------------------------------- |
-| **Camera độ phân giải cao** | Chụp ảnh sắc nét 12–50MP, có OIS, HDR                          |
-| **CameraX API**             | Xử lý real-time: auto-focus, exposure, flash control           |
-| **Local Photo Library**     | Import ảnh cũ đã chụp trước đó (không bắt buộc chụp trong app) |
-| **CPU/NPU on-device**       | Chạy ML Kit Text Recognition **offline** — không cần server    |
-| **Persistent storage**      | Lưu DB local (SQLite/Room) để search ngay cả khi offline       |
+### Ràng buộc di động & cách tiếp cận
 
-
-### Ràng buộc di động & cách giải quyết
-
-
-| Ràng buộc                                        | Giải pháp                                                                |
-| ------------------------------------------------ | ------------------------------------------------------------------------ |
-| **Màn hình nhỏ** → khó xem nhiều ảnh cùng lúc    | Side-Drawer preview: trượt từ cạnh phải để xem nhanh text + ảnh phóng to |
-| **Pin hạn chế** → OCR nặng có thể tốn pin        | Chạy OCR trong coroutine background, tắt khi app background              |
-| **Mạng 3G/4G chập chờn** trong giảng đường       | **Offline-first** — toàn bộ pipeline chạy local, không cần internet      |
-| **Bộ nhớ hạn chế**                               | Nén ảnh JPEG 80%, lưu OCR text riêng (rất nhẹ)                           |
-| **Đa dạng thiết bị** (Android version khác nhau) | Test trên min SDK 24 (Android 7.0) — phủ 95% thiết bị                    |
-
+| Ràng buộc | Hướng xử lý dự kiến | Trạng thái |
+| --- | --- | --- |
+| **Màn hình nhỏ** | Danh sách/thumbnail gọn, Quick Preview hoặc mở ảnh chi tiết | UX cần thử với người dùng |
+| **Pin và tài nguyên có hạn** | OCR ở background phù hợp, tránh quét lặp không cần thiết | Cần đo trên thiết bị thật |
+| **Mạng không ổn định** | Ưu tiên lưu và lập chỉ mục cục bộ; các tính năng core hoạt động offline | Yêu cầu sản phẩm, cần test end-to-end |
+| **Dung lượng lưu trữ hạn chế** | Chính sách lưu ảnh, thumbnail và metadata hợp lý; không cố định JPEG 80% trước khi đánh giá chất lượng | Quyết định kỹ thuật cần kiểm nghiệm |
+| **Thiết bị phân mảnh** | Đặt min OS theo lựa chọn công nghệ và nhóm thiết bị thực tế | Chưa tuyên bố tỷ lệ phủ 95% nếu thiếu số liệu |
 
 ### Cân nhắc alternative platforms
 
+| Platform | Điểm mạnh | Hạn chế trong workflow dự kiến | Kết luận tạm thời |
+| --- | --- | --- | --- |
+| **Mobile app** | Chụp/nhập ảnh và truy cập cục bộ thuận tiện | Màn hình nhỏ, tài nguyên hạn chế | **Ưu tiên cho MVP** |
+| **Web/PWA** | Phân phối nhanh, có thể truy cập camera và lưu dữ liệu offline ở mức nhất định | Khả năng nền, lưu trữ và tích hợp thiết bị khác nhau theo browser/OS | Có thể là alternative; không loại trừ vì lý do công nghệ tuyệt đối |
+| **Desktop** | Duyệt, tổng hợp tài liệu trên màn hình rộng thuận tiện | Không phải lựa chọn thuận tiện nhất để chụp nhanh trong lớp | Phù hợp workflow ôn tập/mở rộng |
+| **Tablet** | Màn hình lớn, có camera và thao tác cảm ứng | Mức phổ biến trong nhóm mẫu chưa được đo | Có thể hỗ trợ về sau |
+| **Smart watch** | Thiết bị đeo nhanh truy cập thông tin ngắn | Khó phù hợp tác vụ quản lý và đọc nhiều ảnh | Không ưu tiên |
 
-| Platform        | Có thay thế được mobile? | Lý do                                                                                                     |
-| --------------- | ------------------------ | --------------------------------------------------------------------------------------------------------- |
-| **Web**         | Không                    | Không truy cập được Camera native; không có offline storage persistent; user phải mở browser mỗi lần chụp |
-| **Desktop app** | Không                    | Không mang theo lên giảng đường; thiếu camera chất lượng cao                                              |
-| **Smart watch** | Không                    | Màn hình quá nhỏ, camera chất lượng thấp                                                                  |
-| **Tablet**      | Một phần                 | Có thể dùng để đọc lại tài liệu, nhưng vẫn cần mobile để chụp                                             |
-| **Mobile**      | Đúng công cụ             | Kết hợp đủ: camera + local storage + on-device ML + di động cao                                           |
+**Kết luận:** Mobile là **lựa chọn thiết kế phù hợp** với giả thuyết về luồng thu nhận–tổ chức–tìm lại ảnh bài giảng. Điều này không có nghĩa OCR hoặc offline storage chỉ khả thi trên mobile.
 
+### Đồng bộ đa nền tảng (cơ hội sau MVP)
 
-### Đồng bộ đa nền tảng (điểm bổ sung)
+Trong khảo sát hiện có, 4/10 người trả lời chọn muốn xuất/đồng bộ sang Google Docs/Notion, trong khi 6/10 chọn chỉ lưu và xem trên điện thoại. Đây là tín hiệu cần nghiên cứu sâu hơn về workflow ôn tập trên laptop, **không đủ để cam kết cloud sync trong MVP**.
 
-Ứng dụng mobile là **cổng thu nạp dữ liệu chính**, nhưng hỗ trợ **xuất sang Google Docs/Notion** để sinh viên tổng hợp đề cương trên laptop khi ôn thi. Đây là tính năng **Major Project** (xem Mục 9 — Impact-Effort Matrix) chứ không phải core MVP.
+- **MVP:** ưu tiên lưu trữ, phân loại, browse và search cục bộ trên mobile.
+- **Sau MVP:** thử export đơn giản trước; nếu có nhu cầu thực tế rõ ràng mới cân nhắc OAuth, đồng bộ nhiều thiết bị và backend.
 
 ### Tổng kết: Mobile có cải thiện có ý nghĩa không?
 
-**Có**, vì:
+**Giả thuyết của nhóm là có**, nhờ hội tụ camera, Photo Library, lưu trữ cục bộ, xử lý on-device và thao tác thuận tiện trong lớp học. Tuy nhiên, giá trị cần chứng minh không chỉ là *ứng dụng chạy trên điện thoại*, mà là **giúp sinh viên tìm đúng tài liệu học tập dễ hơn mà không tăng đáng kể công sức khi lưu ảnh**.
 
-1. **Tác vụ chụp ảnh** gắn liền với context di động (giảng đường, thời gian thực)
-2. **On-device OCR** chỉ khả thi trên mobile có NPU/CPU hiện đại
-3. **Offline-first** đáp ứng ràng buộc mạng không ổn định
-4. **Side-Drawer preview** tận dụng pattern di động (vuốt từ cạnh)
-5. **Local storage** cho phép search ngay lập tức không cần server
+Nhóm sẽ xác thực bằng prototype và usability test, đối chiếu với các cách hiện tại như thư viện ảnh mặc định. Thước đo ưu tiên là **time-to-find đúng ảnh**, **task completion**, **organization effort** và **OCR accuracy theo loại nội dung**; những con số đặt trước chỉ là mục tiêu thử nghiệm.
 
+---

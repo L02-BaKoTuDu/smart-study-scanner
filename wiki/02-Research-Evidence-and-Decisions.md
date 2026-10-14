@@ -1,292 +1,138 @@
 # 02 — Research Evidence and Decisions
 
-> *Trang này chứa Mục 3, 4, 5, 6, 7 trong khung 13 mục bắt buộc.*
+> Trang này bao gồm **Mục 3–7** của Assignment 1. 
+>
+> **Nguồn dữ liệu:** `Khảo sát Nhu cầu & Trải nghiệm Tìm kiếm Tài liệu Bài giảng — Smart Study Scanner (Câu trả lời).xlsx`. Có **12 phản hồi tổng cộng**, trong đó **10 người trả lời các câu hỏi chính**. Các tỷ lệ phải ghi mẫu số tương ứng; các nhận định về tác động của sản phẩm chỉ là giả thuyết cho đến khi được kiểm chứng bằng user testing.
 
 ---
 
 ## Mục 3: Critical Assumptions (Các giả định cốt lõi)
 
-### Ba giả định quan trọng nhất
+| # | Giả định | Vì sao quan trọng? | Phương pháp kiểm chứng | Tiêu chí đề xuất | Hành động nếu không đạt |
+| --- | --- | --- | --- | --- | --- |
+| **A1** | OCR on-device nhận diện đủ chính xác chữ trong ảnh bài giảng | OCR sai khiến tìm kiếm bỏ sót tài liệu | Benchmark ít nhất 30 ảnh thực tế, phân nhóm slide in, bảng, code, công thức | Accuracy mục tiêu ≥80% trên văn bản thông thường; báo cáo riêng từng nhóm | Tiền xử lý ảnh, thay engine hoặc giới hạn loại nội dung hỗ trợ |
+| **A2** | OCR + tìm kiếm từ khóa giúp tìm ảnh nhanh hơn so với cách hiện tại | Hiệu quả tìm lại ảnh mới là giá trị cốt lõi cần chứng minh | Đo cùng người dùng trên các tác vụ tương đương: tìm bằng thư viện mặc định và prototype/app; đảo thứ tự tác vụ | Median time giảm ≥50% **(mục tiêu, chưa phải kết quả)**, không giảm task completion | Thử duyệt theo môn học/buổi học hoặc cách tìm kiếm khác |
+| **A3** | Tổ chức ảnh theo môn/buổi học giúp giảm khó khăn khi tìm lại | 8/10 khó nhớ ảnh ở đâu/khi nào; 7/10 ảnh học lẫn ảnh cá nhân | So sánh manual tag, nhóm theo buổi học và keyword search | Đo time-on-task, số thao tác, task completion | Điều chỉnh cơ chế tổ chức; hạn chế nhập liệu thủ công |
+| **A4** | Import ảnh từ thư viện làm giảm friction so với bắt buộc chụp trong app | Người dùng đã quen camera và thư viện mặc định | Usability test hai luồng: chụp trong app và import từ Gallery | Đo tỷ lệ hoàn thành, số bước, cảm nhận thuận tiện | Ưu tiên luồng Gallery-first |
+| **A5** | Một nhóm người dùng cần xuất/đồng bộ tài liệu sang Docs/Notion | 4/10 chọn nhu cầu xuất/đồng bộ; 6/10 chỉ dùng trên điện thoại | Interview về desktop workflow và thử nghiệm chức năng export trước | Chỉ ưu tiên khi có tình huống sử dụng lặp lại rõ ràng | Trì hoãn đồng bộ hai chiều |
 
+### Riskiest assumptions
 
-| #      | Assumption                                                                            | Tại sao quan trọng                                                                   | Test method                                                     | Pass criteria                               | Fail action                                                                        |
-| ------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **A1** | **OCR On-device đạt ≥ 80% accuracy** trên ảnh chụp slide/bảng trắng thực tế           | Nếu sai → search trả kết quả sai → user mất niềm tin → app vô giá trị                | Test 30 ảnh thật, đếm từ OCR đúng / tổng từ thực                | ≥ 80% trong 30 ảnh đầu tiên                 | Revise: thêm tiền xử lý ảnh (tăng contrast, khử lóa) hoặc tích hợp thêm engine OCR |
-| **A2** | **Tìm kiếm từ khóa giảm ≥ 50% thời gian** so với lướt Camera Roll thủ công            | Nếu user không thấy giá trị → quay về dùng app Ảnh mặc định → mất lợi thế cạnh tranh | So sánh task time: 5 user lướt Camera Roll vs 5 user dùng app   | Median time giảm ≥ 50% (từ ~60s xuống <30s) | Revise: thêm "Browse by subject" fallback nếu user lười gõ keyword                 |
-| **A3** | **User có nhu cầu sync OCR text sang Google Docs/Notion** để làm đề cương trên laptop | Nếu không có nhu cầu → bỏ luôn tính năng sync, giảm scope Vòng 3                     | Survey + phỏng vấn 5 sinh viên đã dùng Notion/Docs thường xuyên | ≥ 60% phản hồi có nhu cầu                   | Defer: chuyển sync sang Vòng 3+ hoặc loại bỏ hẳn                                   |
-
-
-### Riskiest assumption cần kiểm chứng TRƯỚC
-
-> **A1 & A2** là hai assumption rủi ro nhất. Nếu OCR sai quá nhiều HOẶC user thấy search không nhanh hơn lướt tay → ứng dụng mất hoàn toàn giá trị cốt lõi, vì 2 tính năng này là **lợi thế cạnh tranh duy nhất** so với Camera Roll.
+**A2 và A3** cần được kiểm chứng sớm vì khảo sát chỉ ra vấn đề *tìm lại và tổ chức ảnh*, chưa xác nhận OCR là giải pháp tối ưu. **A1** cần benchmark ngay khi có prototype để xác định giới hạn thực tế đối với chữ, code và công thức.
 
 ---
 
 ## Mục 4: Evidence Plan (Kế hoạch thu thập bằng chứng)
 
-### Research Question (Câu hỏi nghiên cứu)
+### Research question
 
-> *"Liệu tìm kiếm từ khóa trên OCR text có giảm đáng kể thời gian tìm kiếm ảnh bài giảng so với thói quen lướt Camera Roll thủ công trong điều kiện sinh viên Bách Khoa khối Kỹ thuật/CNTT không?"*
+> Trong quá trình học và ôn thi, sinh viên gặp trở ngại gì khi lưu trữ, tổ chức và tìm lại ảnh bài giảng; và cơ chế nào (keyword search trên OCR text, duyệt theo môn/buổi học, hay kết hợp) giúp hoàn thành tác vụ nhanh và chính xác hơn?
 
 ### Phương pháp thu thập
 
+| Method | Trạng thái | Output |
+| --- | --- | --- |
+| Khảo sát Google Forms | **Đã thu thập**: 12 phản hồi, 10 phản hồi chính | Thói quen chụp, lưu, tìm; pain points; nhu cầu xuất/đồng bộ; phản hồi mở |
+| Interview người dùng | **Dự kiến**: 5–10 người | Workflow thực tế, switching cost, hành vi dùng nhiều thiết bị |
+| Task observation/usability | **Dự kiến**: 5–10 người, prototype rồi beta app | Time-on-task, task completion, số thao tác, SUS |
+| OCR benchmark | **Dự kiến**: ít nhất 30 ảnh thực | Accuracy theo từng loại nội dung, lỗi cụ thể |
+| Competitive teardown | **Cần xác minh theo phiên bản sản phẩm** | Feature matrix, task comparison, giới hạn hệ thống có sẵn |
 
-| Method                   | Mô tả                                                             | Output                                                                  |
-| ------------------------ | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Khảo sát định lượng**  | Google Forms trên Arena Peer Review                         | Tỷ lệ % sinh viên chụp slide ≥ 3 lần/tuần, thời gian tìm ảnh trung bình |
-| **Task observation**     | 5–10 user test thực tế với Figma prototype (GĐ2) + beta app (GĐ3) | Task completion rate, time-on-task, SUS score                           |
-| **Competitive teardown** | Phân tích 5+ existing solutions (xem Mục 6)                       | Feature matrix, gap analysis                                            |
-| **Interview ngắn**       | 5 sinh viên về workflow ôn thi hiện tại                           | Insights qualitative                                                    |
+### Tiêu chí ủng hộ và bác bỏ giả định
 
+| Quan sát từ thử nghiệm | Diễn giải | Hành động |
+| --- | --- | --- |
+| OCR accuracy ≥80% trên văn bản thông thường | Bước đầu ủng hộ A1 | Tiếp tục ML Kit và mở rộng kiểm thử |
+| OCR accuracy <60% hoặc sai nghiêm trọng với nội dung mục tiêu | A1 gặp rủi ro | Tiền xử lý, engine khác hoặc giới hạn scope |
+| Median tìm ảnh nhanh hơn ≥50% và task completion không giảm | Bước đầu ủng hộ A2 | Giữ hướng giải pháp, tiếp tục test với mẫu lớn hơn |
+| Median chỉ cải thiện <30% | Bằng chứng A2 yếu | Thử browse/grouping theo môn hoặc buổi học |
+| Kết quả nằm giữa các ngưỡng hoặc khác biệt lớn giữa nhóm ảnh | Chưa kết luận | Bổ sung mẫu và phân tích từng nhóm |
 
-### Ai tham gia / nguồn dữ liệu
+**Lưu ý:** Các ngưỡng này do nhóm đề xuất làm tiêu chí thiết kế thử nghiệm, **không phải các kết quả đã được khảo sát chứng minh**.
 
+### Bằng chứng hiện có và hạn chế
 
-| Nhóm                   | Tiêu chí                                       | Số lượng                   | Cách recruit                                         |
-| ---------------------- | ---------------------------------------------- | -------------------------- | ---------------------------------------------------- |
-| **Target users**       | Sinh viên Bách Khoa, khối IT/Kỹ thuật, năm 2–4 | ≥ 25 (survey), 5–10 (test) | Group chat lớp, Arena Peer Review, MXH nội bộ trường |
-| **Existing solutions** | App có sẵn trên Play Store/App Store           | 5–7                        | Search + cài đặt + trải nghiệm thực tế               |
-| **Literary evidence**  | Báo cáo, paper về photo overload, OCR mobile   | 3–5 nguồn                  | Google Scholar, ACM Digital Library                  |
-
-
-### Bằng chứng ủng hộ / bác bỏ giả định
-
-
-| Nếu kết quả là...                                                                | Diễn giải       | Hành động                                                                                          |
-| -------------------------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------- |
-| **≥ 80% OCR accuracy** trên 30 ảnh thật                                          | A1 được ủng hộ  | Tiếp tục với Google ML Kit                                                                         |
-| **< 60% OCR accuracy**                                                           | A1 bị bác bỏ    | Revise: thêm tiền xử lý ảnh hoặc đổi engine OCR                                                    |
-| **Search time giảm ≥ 50%**                                                       | A2 được ủng hộ  | Giữ nguyên MVP scope                                                                               |
-| **Search time giảm < 30%**                                                       | A2 bị bác bỏ    | Thêm auto-classify ảnh theo môn học thay vì chỉ dựa vào keyword                                    |
-| **Kết quả không rõ ràng** (ví dụ: 65–75% accuracy, hoặc search time giảm 30–50%) | A1/A2 còn mơ hồ | Bổ sung user test với sample lớn hơn + phân tích theo subgroup (chữ viết tay vs in, slide vs bảng) |
-
-
-### Bằng chứng đã có & còn thiếu
-
-
-| Trạng thái       | Bằng chứng                                                                       |
-| ---------------- | -------------------------------------------------------------------------------- |
-| **Đã có**          | Khảo sát Arena, competitive teardown 5 app, đánh giá sơ bộ từ 3 mentor trong lớp |
-| **Đang thu thập** | OCR test trên 30 ảnh thật (GĐ3)                                                  |
-| **Còn thiếu**      | Usability test với Figma prototype (GĐ2), beta test với app chạy được (GĐ3)      |
-
-
-### Hạn chế của bằng chứng
-
-- **Sample nhỏ** + đơn trường Bách Khoa → không generalize cho mọi sinh viên
-- **Camera chất lượng khác nhau** giữa các user test (iPhone 15 vs Xiaomi giá rẻ) → ảnh hưởng OCR accuracy
-- **Self-reported data** (khảo sát) có bias: user có thể nói "tôi hay chụp" nhưng thực tế rất ít
-- **Chưa test hành vi dài hạn** (3 tháng) — chỉ test trong 1 buổi
-
-### Kế hoạch khi kết quả không rõ ràng
-
-Nếu sau GĐ2 + GĐ3 vẫn chưa có kết luận dứt khoát về A1 hoặc A2:
-
-- Bổ sung **thuật toán tiền xử lý ảnh** (tăng contrast, khử nhiễu, căn biên) trước khi OCR
-- Hoặc chuyển sang **phân loại ảnh tự động theo môn học** dựa trên Computer Vision (subject classification) thay vì phụ thuộc hoàn toàn vào text search
-- Hoặc **thu hẹp MVP** chỉ tập trung vào "nhập thủ công text + search" và loại bỏ OCR pipeline
+- Đã có khảo sát định lượng nhỏ và một số phản hồi mở.
+- Chưa có bằng chứng thực nghiệm trong file Excel về tốc độ tìm kiếm, accuracy OCR, khả năng giữ chân người dùng hay mức sẵn lòng cài ứng dụng.
+- Mẫu là convenience sample, tập trung nhóm Máy tính/CNTT; không đủ để suy rộng ra mọi sinh viên.
+- Thời gian tìm lại ảnh là số liệu **tự báo cáo**, không phải đo bằng thiết bị.
+- Các cột đánh giá mức độ khó khăn, yêu cầu accuracy OCR và mức hấp dẫn của tính năng có phần **không có câu trả lời**; không được tự suy ra tỷ lệ từ các cột trống.
+- Việc chọn hoặc yêu thích tính năng trong khảo sát không tương đương với hành vi sử dụng sản phẩm ngoài thực tế.
 
 ---
 
 ## Mục 5: User and Market Research (Nghiên cứu người dùng & thị trường)
 
-### Đối tượng nghiên cứu
+### Đối tượng và mẫu nghiên cứu
 
-**Primary:** Sinh viên đại học khối Kỹ thuật & CNTT (tại TP.HCM, tập trung Bách Khoa)
+- **Target dự kiến:** Sinh viên đại học cần lưu trữ và tìm lại ảnh bài giảng, bước đầu tập trung nhóm CNTT/Kỹ thuật.
+- **Mẫu khảo sát thực tế:** **N=12** lượt phản hồi; **n=10** trả lời phần lớn câu hỏi nội dung. Cả 10 người có thông tin ngành học đều thuộc nhóm Máy tính/CNTT.
+- **Thời gian phản hồi trong Excel:** Có phản hồi từ **08/10 đến 11/10/2026**. Không tiếp tục ghi “25/09–09/10, n=27” khi không có nguồn xác thực bổ sung.
+- Với câu hỏi chọn nhiều đáp án, mỗi đáp án có mẫu số riêng và các tỷ lệ **không cộng thành 100%**.
 
-- Năm 2–4 (đã có thói quen học qua slide)
-- Đã từng sử dụng ≥ 1 app scan (CamScanner, MS Lens) HOẶC chụp ảnh slide thường xuyên
-- Đang ôn thi hoặc đã từng ôn thi cấp tốc trong vòng 6 tháng qua
+### Findings định lượng
 
-**Secondary:** Sinh viên khối Kinh tế, Y khoa (potential expand sau MVP)
+| Nội dung | Kết quả từ Excel | Diễn giải có căn cứ |
+| --- | --- | --- |
+| Tần suất chụp | 5/12 hầu như mỗi buổi/hằng ngày; 5/12 khoảng 1–4 lần/tuần; 2/12 hiếm khi/không bao giờ | Có thói quen chụp ở nhiều người; **không thể kết luận 89% chụp ≥3 lần/tuần** |
+| Cách lưu/tìm ảnh | 9/10 dùng thư viện mặc định và lướt thủ công; 1/10 tạo album theo môn | Luồng làm việc hiện tại phụ thuộc nhiều vào thư viện ảnh |
+| Thời gian tìm một ảnh | 2/10 dưới 30 giây; 6/10 khoảng 1–3 phút; 2/10 trên 5 phút/không tìm được | Chỉ **2/10** thuộc nhóm mất trên 5 phút/không tìm được; không có căn cứ cho 63% |
+| Không nhớ vị trí/ngày chụp | **8/10** | Pain point nổi bật nhất trong mẫu |
+| Ảnh học trộn lẫn ảnh cá nhân | **7/10** | Nhu cầu tổ chức/nhóm ảnh đáng ưu tiên |
+| Ảnh bị lóa/nghiêng/khó đọc | **6/10** | Chất lượng ảnh ảnh hưởng usability |
+| Text trong ảnh không thể copy/search | **3/10** | OCR có tiềm năng nhưng không phải pain point được chọn nhiều nhất |
+| PDF dài phải lật nhiều trang | **2/10** | Pain point phụ |
+| Muốn xuất/đồng bộ sang Docs/Notion | **4/10** | Có phân khúc quan tâm đến desktop/export workflow |
+| Chỉ lưu và xem trên điện thoại | **6/10** | Phù hợp tiếp cận mobile-first |
+| Bối cảnh dùng keyword search | 5/10 ôn thi cấp tốc; 2/10 tổng hợp ghi chú hằng tuần; 3/10 hầu như không dùng | Không thể suy ra “85% chắc chắn/có thể dùng app” |
 
-### Phương pháp nghiên cứu
+### Contradictory findings và phản hồi mở
 
+1. **Lợi thế cạnh tranh OCR không mặc nhiên tồn tại.** Người trả lời lưu ý iOS Live Text và Google Lens/Photos có khả năng xử lý văn bản/ảnh; nhóm phải kiểm tra công cụ hiện có trước khi tuyên bố “Camera Roll hoàn toàn không search được text”.
+2. **Mở app riêng để chụp có thể tăng thao tác.** Có phản hồi ưu tiên camera mặc định; import từ Gallery nên là luồng đầu vào chính chứ không phải tiện ích thêm rất muộn.
+3. **OCR không đồng nghĩa đọc hiểu ảnh học tập.** Công thức, code, sơ đồ và chữ viết tay cần đánh giá riêng.
+4. **Gợi ý về smart grouping.** Một số ý kiến đề xuất gom ảnh theo buổi học, môn học hoặc thời gian/lịch học; đó là **ý tưởng cần thử nghiệm**, không phải nhu cầu đã được xác nhận về tỷ lệ.
 
-| Method                      | Thời gian               | Số lượng                       | Output                         |
-| --------------------------- | ----------------------- | ------------------------------ | ------------------------------ |
-| **Khảo sát Google Forms**   | 25/09/2026 – 09/10/2026 | n=27 (đã hoàn thành)           | Báo cáo định lượng             |
-| **Interview sâu (planned)** | GĐ2, GĐ3                | 5–10 user                      | Pain points, workflow hiện tại |
+### Implications
 
+**Observed need:** Khó nhớ, khó tổ chức và tìm lại ảnh bài giảng.
 
-### Findings chính (từ khảo sát n=27)
+**Proposed solution hypothesis:** Kết hợp OCR search với duyệt theo môn, buổi hoặc thời điểm chụp — thay vì mặc định keyword search giải quyết mọi vấn đề.
 
-
-| Câu hỏi                                                       | Kết quả                                                      |
-| ------------------------------------------------------------- | ------------------------------------------------------------ |
-| Bạn có thường xuyên chụp ảnh slide/bảng trên lớp không?       | **89% (24/27)** trả lời "Có" (≥ 3 lần/tuần)                  |
-| Sau khi chụp, bạn có tìm lại ảnh đó để ôn thi không?          | **82% (22/27)** trả lời "Có"                                 |
-| Trung bình bạn mất bao lâu để tìm lại 1 ảnh bài giảng cụ thể? | **63% (17/27)** mất > 5 phút; **22% (6/27)** mất > 10 phút   |
-| Bạn đã dùng app nào để scan/quản lý ảnh bài giảng?            | 41% CamScanner, 22% MS Lens, 15% Apple Notes, 22% không dùng |
-| Bạn có thấy phiền khi lướt album tìm ảnh không?               | **78% (21/27)** trả lời "Có" / "Rất phiền"                   |
-| Nếu có app tự động OCR + search từ khóa, bạn có dùng không?   | **85% (23/27)** trả lời "Có thể" hoặc "Chắc chắn"            |
-
-
-### Contradictory findings (Phát hiện ngược chiều)
-
-> Một số sinh viên (18%, 5/27) phản hồi rằng họ **đã quen dùng Apple Notes / Google Keep** cho note môn học và sẽ không chuyển sang app mới vì **switching cost** quá cao.
-
-**Insight:** Cần **giảm friction bằng cách cho phép import ảnh từ Camera Roll** (không bắt buộc chụp trong app) ở Vòng 3. Đồng thời tập trung vào pain point **ô nhiễm album ảnh** chứ không cạnh tranh với app note tổng quát.
-
-### Hạn chế của bằng chứng
-
-- **Sample n=27** quá nhỏ để generalize
-- **Single-school bias** (chỉ Bách Khoa) → có thể không đại diện sinh viên trường khác
-- **Self-selection bias** — người trả lời survey thường là người đã quan tâm đến vấn đề
-- **Survey bias** — câu hỏi có thể leading user đến câu trả lời "Có, tôi thấy phiền"
-- Chưa test **hành vi dài hạn** (3+ tháng) — chỉ dựa trên recollection
-
-### Implications cho dự án
-
-1. **Có vấn đề thật** với 78% phản hồi thấy phiền → cần giải quyết
-2. **Thị trường chấp nhận** OCR + search với 85% sẵn lòng thử
-3. **Switching cost** là rào cản → cần import từ Camera Roll
-4. **Cần test thực tế** (không chỉ survey) vì self-report có thể khác với behavior
+**Next evidence needed:** Test thực tế trên cùng tập ảnh để xác định giải pháp nào ít thao tác, tìm đúng và nhanh hơn.
 
 ---
 
 ## Mục 6: Existing Solutions and Alternatives (Phân tích giải pháp hiện có)
 
-> *Phân tích 7 giải pháp thay thế (≥ 5 theo yêu cầu rubric). Mỗi giải pháp đều có "What we learned" để dẫn đến product opportunity.*
+> Đây là **khung comparative research cần kiểm chứng**; không diễn giải thành kết quả benchmark đã hoàn tất. Tính năng của mỗi sản phẩm phải được xác nhận theo phiên bản/platform cụ thể.
 
-### 1. Camera Roll / App Thư viện ảnh mặc định (iOS/Android)
+| Giải pháp | Vai trò trong workflow | Cần đánh giá thực nghiệm | Product opportunity/risk |
+| --- | --- | --- | --- |
+| Camera Roll / Photos mặc định | Chụp, lưu và duyệt ảnh | Search text/nội dung ảnh, albums, cách tìm theo ngày, số bước thao tác | Hành vi đã quen; app mới phải chứng minh giá trị tăng thêm |
+| Google Photos / Lens | Xử lý và tìm thông tin từ ảnh | Tính năng nhận diện, keyword search, online/offline | OCR có thể không phải điểm khác biệt đủ lớn |
+| Apple Photos / Live Text | Nhận dạng và tương tác với văn bản trong ảnh | Khả năng theo phiên bản iOS/thiết bị và search | Rủi ro trùng chức năng hệ điều hành |
+| CamScanner | Scan, OCR, xuất tài liệu | Chất lượng crop, tìm nội dung sau scan, tổ chức ảnh | Cạnh tranh ở **post-scan workflow** nếu chứng minh tốt hơn |
+| Microsoft Lens / các công cụ Microsoft | Scan và đưa dữ liệu sang hệ sinh thái tài liệu | Trạng thái sản phẩm hiện tại, luồng xuất, quyền truy cập | Tránh dùng so sánh lỗi thời |
+| Google Keep / Apple Notes | Ghi chú có ảnh và đồng bộ | Nhập ảnh, OCR, search, tổ chức theo môn | Switching cost là giả thuyết cần phỏng vấn |
+| Notion / Obsidian / Evernote | Quản lý tri thức | OCR, import, tìm kiếm và chi phí thực tế | Có thể là đích export, không nhất thiết là đối thủ trực tiếp |
 
+### Gap hypothesis
 
-| Aspect              | Đánh giá                                                                      |
-| ------------------- | ----------------------------------------------------------------------------- |
-| **Làm gì**          | Lưu tất cả ảnh chụp, có album tự tạo                                          |
-| **Ưu điểm**         | Tiện lợi, chụp là lưu ngay, không cần cài thêm                                |
-| **Nhược điểm**      | Ảnh bài giảng bị trộn với ảnh đời sống; text là "text chết" không search được |
-| **Phù hợp target?** | Không giải quyết pain point                                                 |
+> Cơ hội của Smart Study Scanner **không phải** “OCR-search chưa tồn tại”, mà có thể là **workflow tìm lại ảnh bài giảng theo ngữ cảnh học tập**: import ảnh cũ, tổ chức theo môn/buổi, tìm theo text và xác nhận kết quả nhanh với ít thao tác.
 
-
-> **What we learned:** Đây là "trạng thái hiện tại" mà 22% user đang dùng — vấn đề lớn nhất là thiếu khả năng search text. Cơ hội: biến ảnh thành data có thể search.
-
-### 2. CamScanner
-
-
-| Aspect              | Đánh giá                                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Làm gì**          | Scan tài liệu, auto-crop, xuất PDF đa trang                                                                   |
-| **Ưu điểm**         | Cắt ảnh đẹp, OCR khá tốt (tiếng Anh), phổ biến                                                                |
-| **Nhược điểm**      | Tập trung scan văn phòng (hóa đơn, hợp đồng); PDF dài phải lật từng trang; nhiều quảng cáo; freemium khó chịu |
-| **Phù hợp target?** | Một phần — dùng để scan, không dùng để tìm lại                                                             |
-
-
-> **What we learned:** CamScanner giải quyết **trước-scan** (làm sạch ảnh) rất tốt nhưng **không giải quyết post-scan** (tìm kiếm, phân loại). Cơ hội: tập trung vào post-scan workflow.
-
-### 3. Microsoft Lens
-
-
-| Aspect              | Đánh giá                                                                        |
-| ------------------- | ------------------------------------------------------------------------------- |
-| **Làm gì**          | Scan + OCR + xuất sang Word/PDF/OneNote                                         |
-| **Ưu điểm**         | Khử lóa bảng trắng rất tốt; liên kết hệ sinh thái Microsoft 365                 |
-| **Nhược điểm**      | Lưu trữ phân tán; thiếu giao diện quản lý tập trung theo môn học; UX search yếu |
-| **Phù hợp target?** | Một phần — khử lóa tốt nhưng quản lý yếu                                     |
-
-
-> **What we learned:** Khử lóa bảng là **must-have feature** (không có sẽ bị user chê). Nhưng quản lý sau scan mới là cốt lõi. Cơ hội: lấy best practice khử lóa, tập trung phần sau.
-
-### 4. Google Keep / Apple Notes
-
-
-| Aspect              | Đánh giá                                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------------ |
-| **Làm gì**          | Ghi chú + OCR cơ bản + sync cloud                                                                |
-| **Ưu điểm**         | Sync nhanh, UI đơn giản, có sẵn trên thiết bị                                                    |
-| **Nhược điểm**      | Không tối ưu cho luồng chụp slide liên tục; giao diện ghi chú hỗn tạp, khó phân loại theo kỳ học |
-| **Phù hợp target?** | User đã quen dùng → switching cost cao                                                        |
-
-
-> **What we learned:** Đây là **đối thủ cạnh tranh lớn nhất** vì user đã cài sẵn. Phải **giảm friction tối đa** (import từ album, không bắt buộc chụp trong app) và **tập trung vào post-scan** (thứ Keep/Notes không làm tốt).
-
-### 5. Tạo Album/Folder thủ công trên điện thoại
-
-
-| Aspect              | Đánh giá                                                                                    |
-| ------------------- | ------------------------------------------------------------------------------------------- |
-| **Làm gì**          | User tự phân loại ảnh vào album sau buổi học                                                |
-| **Ưu điểm**         | Miễn phí, không cần cài thêm, tự do phân loại                                               |
-| **Nhược điểm**      | Đòi hỏi tính kỷ luật cao; user thường **quên phân loại** sau buổi học → thư mục bị bỏ hoang |
-| **Phù hợp target?** | Không realistic cho đa số user                                                            |
-
-
-> **What we learned:** **Auto-organize** theo môn học (dựa trên thời gian chụp + tag thủ công lúc save) là **differentiation rõ ràng** so với giải pháp thủ công.
-
-### 6. Notion / Obsidian (knowledge management)
-
-
-| Aspect              | Đánh giá                                                                                   |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| **Làm gì**          | Ghi chú có cấu trúc, link nội bộ, knowledge graph                                          |
-| **Ưu điểm**         | Rất mạnh cho người dùng power user, cộng đồng lớn                                          |
-| **Nhược điểm**      | Vẫn cần user **tự gõ text** — không giải quyết "text chết" trong ảnh; steep learning curve |
-| **Phù hợp target?** | Không nhắm cùng phân khúc — power user khác với sinh viên mainstream                     |
-
-
-> **What we learned:** Notion giải quyết **sau khi có text** rất tốt → có thể là **integration partner** thay vì đối thủ. Cơ hội: xuất OCR text sang Notion thay vì cạnh tranh.
-
-### 7. Evernote
-
-
-| Aspect              | Đánh giá                                                                    |
-| ------------------- | --------------------------------------------------------------------------- |
-| **Làm gì**          | Note-taking lâu đời + OCR từ sớm                                            |
-| **Ưu điểm**         | OCR tốt từ 2010s, ecosystem rộng                                            |
-| **Nhược điểm**      | UX scan kém, nặng, free tier giới hạn (chỉ 60 MB/tháng), giao diện lỗi thời |
-| **Phù hợp target?** | App cũ, sinh viên không chọn                                              |
-
-
-> **What we learned:** OCR-search **đã có ý tưởng từ lâu** nhưng UX chưa tốt → cơ hội cho Smart Study Scanner tập trung "**post-scan cho học tập**" với UX hiện đại.
-
-### Gap Analysis — Cơ hội thị trường
-
-
-| Need chưa được giải quyết tốt                 | Existing solutions                            | Smart Study Scanner   |
-| --------------------------------------------- | --------------------------------------------- | --------------------- |
-| **Search text trong ảnh bài giảng**           | Camera Roll (không), Keep/Notes (yếu)         | Cốt lõi             |
-| **Tự động phân loại theo môn học**            | Thủ công (cần kỷ luật), CamScanner (theo PDF) | Auto + manual tag   |
-| **OCR offline nhanh**                         | Evernote (online), MS Lens (online)           | On-device ML Kit    |
-| **Preview nhanh không cần mở nhiều màn hình** | Hầu hết đều mở full screen                    | Side-Drawer         |
-| **Tập trung 100% cho học tập**                | CamScanner (văn phòng), Evernote (tổng quát)  | Chuyên biệt học tập |
-
-
-### Differentiation rõ ràng
-
-> **Thị trường thiếu một công cụ tập trung vào "Post-scan cho học tập"** — biến ảnh thành dữ liệu search được và quản lý tức thì, không đòi hỏi thao tác sắp xếp thủ công rườm rà.
-
-→ Smart Study Scanner lấp đầy gap này bằng **OCR on-device + Auto-organize + Search <1s + Side-Drawer Preview**.
+**Cách xác thực khác biệt:** Dùng cùng bộ ảnh và cùng các tác vụ tìm ảnh để so sánh giữa prototype và các giải pháp có sẵn. Đo time-to-find, tỷ lệ tìm đúng, số thao tác và khả năng xử lý nội dung đặc thù. Không công bố “search <1s” hoặc “tiết kiệm 50–70%” như thực tế khi chưa đo.
 
 ---
 
-## Mục 7: Evidence Evaluation & Product Decisions (Đánh giá & Ra quyết định)
+## Mục 7: Evidence Evaluation & Product Decisions (Đánh giá và quyết định)
 
-### Quyết định sản phẩm dựa trên bằng chứng
-
-
-| #      | Decision                                                               | Evidence ủng hộ                                                                          | Evidence ngược                             | Final                   | Thay đổi trong dự án                                         |
-| ------ | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------ | ----------------------- | ------------------------------------------------------------ |
-| **D1** | **Giữ OCR + Search toàn văn** làm tính năng cốt lõi                    | Khảo sát n=27: 78% thấy phiền khi lướt album, 85% sẵn lòng dùng app OCR-search           | 18% không muốn chuyển app (switching cost) | **KEEP**                | Giữ nguyên MVP. Bổ sung import ảnh từ album để giảm friction |
-| **D2** | **Áp dụng Side-Drawer Preview** thay vì mở full screen                 | Case study DMS (Document Management System) cho thấy preview nhanh tăng productivity 30% | Chưa test trực tiếp với target user        | **REVISE**              | Thêm vào MVP. Test trong usability test GĐ2                  |
-| **D3** | **Bỏ các tính năng scan hóa đơn/CCCD, ký tên điện tử, dịch thuật**     | Không phù hợp target user (sinh viên)                                                    | —                                          | **REJECT**              | Thu hẹp scope MVP. Giữ tập trung 100% vào bài giảng          |
-| **D4** | **Dùng Google ML Kit on-device** thay vì cloud OCR (Google Vision API) | Survey 22% thường xuyên dùng 4G, pin hạn chế                                             | ML Kit có thể kém chính xác hơn cloud      | **KEEP**                | Dùng ML Kit. Test accuracy (A1) trong GĐ3                    |
-| **D5** | **Tự động phân loại theo môn học** bằng cách cho user chọn lúc save    | Camera Roll thủ công bị bỏ hoang → cần auto-classify                                     | Có thể gây phiền nếu AI phân loại sai      | **REVISE**              | Auto + manual tag tại thời điểm save (1 tap)                 |
-| **D6** | **Sync sang Google Docs/Notion** cho desktop workflow                  | Khảo sát chưa đủ (cần thêm interview)                                                    | Có thể chỉ là "nice to have"               | **INVESTIGATE FURTHER** | Defer sang Vòng 3+ nếu A3 (sync need) được ủng hộ            |
-
-
-### Tóm tắt các quyết định
-
-- **KEEP (giữ nguyên):** OCR + Search, ML Kit on-device
-- **REVISE (giữ hướng, điều chỉnh):** Side-Drawer Preview, Auto-classify môn học
-- **REJECT (loại bỏ):** Tính năng scan văn phòng, ký tên, dịch thuật
-- **INVESTIGATE (cần thêm data):** Sync Google Docs/Notion
-
-### Thay đổi trong dự án sau khi đánh giá
-
-1. **Thêm:** Import ảnh từ Camera Roll (giảm switching cost)
-2. **Thêm:** Manual tag môn học tại save (1 tap, không cần AI)
-3. **Loại bỏ:** Tính năng scan văn phòng, dịch thuật
-4. **Defer:** Sync Google Docs/Notion (chỉ làm nếu A3 được ủng hộ)
-5. **Test:** Side-Drawer usability trong GĐ2 với 5–10 user
-
+| # | Decision | Bằng chứng hiện có | Điểm chưa rõ | Kết luận và hành động |
+| --- | --- | --- | --- | --- |
+| **D1** | Giữ hướng tìm kiếm ảnh bằng OCR + keyword | 3/10 chọn khó copy/search text; 8/10 quên nơi/ngày chụp | Search hay grouping hiệu quả hơn? | **KEEP AS HYPOTHESIS** — thử nghiệm song song search và browse |
+| **D2** | Import ảnh từ Gallery bên cạnh chụp trong app | 9/10 đang lưu/tìm trong thư viện mặc định; phản hồi mở nêu friction của app chụp riêng | Luồng nào thuận tiện hơn? | **REVISE MVP** — coi Gallery import là luồng chính |
+| **D3** | Quản lý theo môn/buổi học | 8/10 khó nhớ vị trí, 7/10 ảnh trộn lẫn | Manual tag có gây phiền? Auto-group có chính xác? | **KEEP + TEST** — bản đầu manual tagging; không gọi là auto-classification |
+| **D4** | Thử OCR on-device bằng ML Kit | Phù hợp định hướng thử nghiệm mobile/offline; có phản hồi về code và công thức | Độ chính xác trên dữ liệu thực và khả năng cạnh tranh OCR sẵn có | **EXPERIMENT** — benchmark trước khi khẳng định lợi thế |
+| **D5** | Preview nhanh kết quả | Hợp lý về UX nhưng chưa có khảo sát so sánh dạng preview | Side-Drawer có thực sự tốt hơn thumbnail/detail screen? | **TEST UX** — không khóa MVP vào Side-Drawer |
+| **D6** | Export Docs/Notion, đồng bộ | 4/10 quan tâm, 6/10 chỉ dùng trên điện thoại | Tần suất dùng laptop và nhu cầu sync hai chiều | **INVESTIGATE** — thử export thủ công, defer sync backend |
+| **D7** | Không phát triển hóa đơn/CCCD, ký tên, dịch thuật | Ngoài bài toán đang nghiên cứu | Không cần test trong MVP | **OUT OF SCOPE** |
